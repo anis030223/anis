@@ -38,4 +38,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
     ];
     
+    //Relasi ke tabel pengaduan
+    public function pengaduan()
+    {
+        return $this->hasMany('pengaduan','masyarakat_id','id');
+    }
+
+    //Relasi ke tabel tanggapan
+    public function tanggapan()
+    {
+        return $this->hasMany('tanggapan','users_id','id');
+    }
 }

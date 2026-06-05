@@ -29,9 +29,4 @@ class Pengaduan extends Model
         return $this->belongsTo('users','masyarakat_id','id');
     }
 
-    //Relasi ke tabel tanggapan
-    public function tanggapan()
-    {
-        return $this->hasMany('tanggapan','users_id','id');
-    }
 }

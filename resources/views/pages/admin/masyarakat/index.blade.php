@@ -22,36 +22,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>3207172222000000</td>
-                                            <td>Lukman</td>
-                                            <td>Bandung</td>
+                                        @foreach ($dataMasyarakat as $masyarakat)
+                                            <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $masyarakat->nik }}</td>
+                                            <td>{{ $masyarakat->name }}</td>
+                                            <td>{{ $masyarakat->alamat }}</td>
                                             <td>
-                                                <a href="/masyarakat/1/edit" class="btn btn-warning btn-xs" title="Edit Masyarakat"><li class="fa fa-edit"></li></a>
-                                                <a href="" class="btn btn-primary btn-xs" title="Detail Masyarakat"><li class="fa fa-list"></li></a>
+                                                <a href="/masyarakat/{{ $masyarakat->id }}/edit" class="btn btn-warning btn-xs" title="Edit Masyarakat"><li class="fa fa-edit"></li></a>
+                                                <a href="" class="btn btn-primary btn-xs" tittle="Detail Masyarakat">
+                                                    <li class="fa fa-list"></li>
+                                                </a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>3207172222000000</td>
-                                            <td>Fery</td>
-                                            <td>Bandung</td>
-                                            <td>
-                                                <a href="/masyarakat/2/edit" class="btn btn-warning btn-xs" title="Edit Masyarakat"><li class="fa fa-edit"></li></a>
-                                                <a href="" class="btn btn-primary btn-xs" title="Detail Masyarakat"><li class="fa fa-list"></li></a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>3207172222000000</td>
-                                            <td>Samsu</td>
-                                            <td>Bandung</td>
-                                            <td>
-                                                <a href="/masyarakat/3/edit" class="btn btn-warning btn-xs" title="Edit Masyarakat"><li class="fa fa-edit"></li></a>
-                                                <a href="" class="btn btn-primary btn-xs" title="Detail Masyarakat"><li class="fa fa-list"></li></a>
-                                            </td>
-                                        </tr>
+                                        @endforeach
+                                        
                                     </tbody>
                                 </table>
                             </div>

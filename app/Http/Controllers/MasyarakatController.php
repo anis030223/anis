@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MasyarakatController extends Controller
@@ -15,7 +16,8 @@ class MasyarakatController extends Controller
             'title' => 'APM | Masyarakat',
             'header' => 'Masyarakat',
             'breadcrumb1' => 'Masyarakat',
-            'breadcrumb2' => 'Index'
+            'breadcrumb2' => 'Index',
+            'dataMasyarakat' => User::where('role','Masyarakat')->get()
         ]);
     }
 
@@ -37,7 +39,27 @@ class MasyarakatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'textNik'  =>'required|unique:users,nik',
+            'textNama'  =>'required',
+            'selectJenisKelamin' => 'required',
+            'textNoTelepon' => 'required',
+            'textAlamat' =>'required',
+            'textEmail' => 'required|unique:users,email',
+            'textPassword' => 'required'
+        ]);
+        $dataSimpanMasyarakat = [
+            'nik' =>$request->textNik,
+            'name' =>$request->textNama,
+            'jeniskelamin' =>$request->selectJenisKelamin,
+            'notelepon' =>$request->textNoTelepon,
+            'alamat' =>$request->textAlamat,
+            'email' =>$request->textEmail,
+            'password' =>bcrypt($request->textPassword),
+            'role' =>'masyarakat'
+        ];
+        User::create($dataSimpanMasyarakat);
+        return redirect('/masyarakat');
     }
 
     /**
@@ -57,7 +79,8 @@ class MasyarakatController extends Controller
             'title' => 'APM | Masyarakat',
             'header' => 'Masyarakat',
             'breadcrumb1' => 'Masyarakat',
-            'breadcrumb2' => 'Edit'
+            'breadcrumb2' => 'Edit',
+            'dataMasyarakat' => User::where('id',$id)->first()
         ]);
     }
 
@@ -66,7 +89,27 @@ class MasyarakatController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $request->validate([
+            'textNik'  =>'required|unique:users,nik',
+            'textNama'  =>'required',
+            'selectJenisKelamin' => 'required',
+            'textNoTelepon' => 'required',
+            'textAlamat' =>'required',
+            'textEmail' => 'required|unique:users,email',
+            'textPassword' => 'required'
+        ]);
+        $dataSimpanMasyarakat = [
+            'nik' =>$request->textNik,
+            'name' =>$request->textNama,
+            'jeniskelamin' =>$request->selectJenisKelamin,
+            'notelepon' =>$request->textNoTelepon,
+            'alamat' =>$request->textAlamat,
+            'email' =>$request->textEmail,
+            'password' =>bcrypt($request->textPassword),
+            'role' =>'masyarakat'
+        ];
+        User::where('id',$id)->update($dataSimpanMasyarakat);
+        return redirect('/masyarakat');
     }
 
     /**
