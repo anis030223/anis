@@ -34,3 +34,4 @@ Route::get('/profileuser',[UserProfileController::class,'index']);
 
 //Authentication Admin
 Route::post('/authadmin',[LoginAdminController::class,'authadmin']);
+Route::any('/dataTableLaporan',[LaporanMasukController::class, 'getDataLaporan']);

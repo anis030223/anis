@@ -44,48 +44,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>22 Oktober 2024</td>
-                                                    <td>Limbah Pabrik ABCD</td>
-                                                    <td>Lukman</td>
-                                                    <td>Pencemaran</td>
-                                                    <td><span class="badge badge-primary">New</span></td>
-                                                    <td>
-                                                        <a href="/laporanmasuk/detail/1" class="btn btn-outline-primary btn-xs"
-                                                            title="Edit Masyarakat">
-                                                            <li class="fa fa-list"></li>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>22 Oktober 2024</td>
-                                                    <td>Limbah Pabrik ABCD</td>
-                                                    <td>ADIT</td>
-                                                    <td>Kekerasan</td>
-                                                    <td><span class="badge badge-warning">Process</span></td>
-                                                    <td>
-                                                        <a href="/laporanmasuk/detail/2" class="btn btn-outline-primary btn-xs"
-                                                            title="Edit Masyarakat">
-                                                            <li class="fa fa-list"></li>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>22 Oktober 2024</td>
-                                                    <td>Limbah Pabrik ABCD</td>
-                                                    <td>Hakim</td>
-                                                    <td>Pencemaran</td>
-                                                    <td><span class="badge badge-success">Selesai</span></td>
-                                                    <td>
-                                                        <a href="/laporanmasuk/detail/3" class="btn btn-outline-primary btn-xs"
-                                                            title="Edit Masyarakat">
-                                                            <li class="fa fa-list"></li>
-                                                        </a>
-                                                    </td>
-                                                </tr>
 
                                             </tbody>
                                         </table>
@@ -100,4 +58,71 @@
                 </div>
                 <!-- /.row -->
             </section>
+@endsection
+@section('js')
+<script type="text/javascript">
+const table = $('#idDataTable').DataTable({
+    "pageLength"    : 10,
+    "lengthMenu"    : [
+        [10, 25, 50, 100], 
+        [10, 25, 50, 100]
+    ],
+    "bLengthChange" : true,
+    "bFilter"       : true,
+    "bInfo"         : true,
+    "processing"    : true,
+    "bServerSide"   : true,
+    ajax:{
+        url:"{{ 'url'('') }}",
+        type: "POST",
+    },
+    columnDefs:[{
+        targets: "_all",
+        visible: true
+    },
+    {
+        "targets": 0, // Untuk urutan data di dalam kolom
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta){
+            return row.tanggalpengaduan 
+        }
+    },
+    {
+        "targets": 1, // Untuk urutan data di dalam kolom
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta){
+            return row.juduln 
+        }
+    },
+    {
+        "targets": 3, // Untuk urutan data di dalam kolom
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta){
+            return row.name
+        }
+    },
+    {
+        "targets": 4, // Untuk urutan data di dalam kolom
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta){
+            return row.namakategori 
+        }
+    },
+    {
+        "targets": 5, // Untuk urutan data di dalam kolom
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta){
+            return row.status 
+        }
+    },
+    {
+        "targets": 6, // Untuk urutan data di dalam kolom
+        "class": "text-nowrap",
+        "render": function(data, type, row, meta){
+            return <a href="laporanmasuk/detail/$(row.id)" class="btn btn-primary btn-xs"><li class="fa fa-list"></li></a>
+        }
+    },
+]
+})
+</script>
 @endsection
