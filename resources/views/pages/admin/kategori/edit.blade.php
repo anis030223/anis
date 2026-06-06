@@ -10,28 +10,30 @@
                                     <li class="fa fa-undo"></li> Kembali
                                 </a>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="col-md-6">
-                                    <div class="form form-group">
-                                        <label for="textNamaKategori">Nama Kategori</label>
-                                        <input type="text" name="textNamaKategori" id="textNamaKategori" class="form form-control">
-                                    </div>
-                                    <div class="form form-group">
-                                        <label for="textDeskripsi">Deskripsi</label>
-                                        <input type="text" name="textDeskripsi" id="textDeskripsi" class="form form-control">
-                                    </div>
-                                    <div class="form form-group">
-                                        <a href="/kategori" class="btn btn-success btn-md"><li class="fa fa-save"></li> Simpan</a>
-                                    </div>
+                                    <form action="/kategori/{{ $kategori->id }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <div class="form form-group">
+                                            <label for="textNamaKategori">Nama Kategori</label>
+                                            <input type="text" name="textNamaKategori" id="textNamaKategori" class="form form-control" value="{{ $kategori->nama_kategori }}">
+                                        </div>
+                                        <div class="form form-group">
+                                            <label for="textDeskripsi">Deskripsi</label>
+                                            <input type="text" name="textDeskripsi" id="textDeskripsi" class="form form-control" value="{{ $kategori->deskripsi }}">
+                                        </div>
+                                        <div class="form form-group">
+                                            <button type="submit" class="btn btn-success btn-md">
+                                                <li class="fa fa-save"></li> Simpan
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <!-- /.card-body -->
+                            </div>
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-            </section>
+                </section>
 @endsection

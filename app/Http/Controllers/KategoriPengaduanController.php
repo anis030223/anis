@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KategoriPengaduanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
+        // Mengambil data asli dari database
+        $kategori = DB::table('kategoripengaduan')->get();
+
         return view('pages.admin.kategori.index',[
             'title' => 'APM | Kategori',
             'header' => 'Kategori',
             'breadcrumb1' => 'Kategori',
-            'breadcrumb2' => 'Index'
+            'breadcrumb2' => 'Index',
+            'kategori' => $kategori
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('pages.admin.kategori.create',[
@@ -32,48 +31,56 @@ class KategoriPengaduanController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'textNamaKategori' => 'required',
+            'textDeskripsi' => 'required',
+        ]);
+
+        // Beneran menyimpan data inputan kamu ke database
+        DB::table('kategoripengaduan')->insert([
+            'nama_kategori' => $request->textNamaKategori,
+            'deskripsi' => $request->textDeskripsi,
+        ]);
+
+        return redirect('/kategori')->with('success', 'Data kategori pengaduan berhasil disimpan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $kategori = DB::table('kategoripengaduan')->where('id', $id)->first();
+
+        return view('pages.admin.kategori.detail',[
+            'title' => 'APM | Detail Kategori',
+            'header' => 'Detail Kategori',
+            'breadcrumb1' => 'Kategori',
+            'breadcrumb2' => 'Detail',
+            'kategori' => $kategori
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
+        $kategori = DB::table('kategoripengaduan')->where('id', $id)->first();
+
         return view('pages.admin.kategori.edit',[
             'title' => 'APM | Kategori',
             'header' => 'Kategori',
             'breadcrumb1' => 'Kategori',
-            'breadcrumb2' => 'Edit'
+            'breadcrumb2' => 'Edit',
+            'kategori' => $kategori
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        // Tetap memunculkan notif gagal diubah sesuai request kamu
+        return redirect('/kategori')->with('error', 'Maaf data tidak dapat diubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
     }
-    }
+}

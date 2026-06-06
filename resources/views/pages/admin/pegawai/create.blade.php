@@ -12,6 +12,8 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                <form action="/pegawai" method="POST">
+                                    @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form form-group">
@@ -35,7 +37,7 @@
                                         </div>
                                         <div class="form form-group">
                                             <label for="textNoTelepon">No Telepon</label>
-                                            <input type="text" class="form form-control" id="textNoTelepon" placeholder="Contoh : +6282222777">
+                                            <input type="text" name="textNoTelepon" class="form form-control" id="textNoTelepon" placeholder="Contoh : +6282222777">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -64,9 +66,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-12">
-                                        <a href="pegawai.html" class="btn btn-success btn-md float-right"><li class="fa fa-save"></li> Simpan</a href="/masyarakat.html">
+                                        <button type="submit" class="btn btn-success btn-md float-right"><li class="fa fa-save"></li> Simpan</button>
+                                    </div>
                                     </div>
                                 </div>
+                            </form>
                             </div>
                             <!-- /.card-body -->
                         </div>

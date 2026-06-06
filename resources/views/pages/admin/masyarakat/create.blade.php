@@ -12,7 +12,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <form action="/masyarakat" method="POST">
+                                <form action="/masyarakat"method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use illuminate\Validation\Rule;
 
 class MasyarakatController extends Controller
 {
@@ -33,6 +34,7 @@ class MasyarakatController extends Controller
             'breadcrumb2' => 'Create'
         ]);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -67,7 +69,13 @@ class MasyarakatController extends Controller
      */
     public function show(string $id)
     {
-        //
+    return view('pages.admin.masyarakat.show',[
+        'title' => 'APM | Detail Masyarakat',
+        'header' => 'Detail Masyarakat',
+        'breadcrumb1' => 'Masyarakat',
+        'breadcrumb2' => 'Detail',
+        'dataMasyarakat' => User::findOrFail($id)
+    ]);
     }
 
     /**
@@ -87,29 +95,9 @@ class MasyarakatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+   public function update(Request $request, string $id)
     {
-         $request->validate([
-            'textNik'  =>'required|unique:users,nik',
-            'textNama'  =>'required',
-            'selectJenisKelamin' => 'required',
-            'textNoTelepon' => 'required',
-            'textAlamat' =>'required',
-            'textEmail' => 'required|unique:users,email',
-            'textPassword' => 'required'
-        ]);
-        $dataSimpanMasyarakat = [
-            'nik' =>$request->textNik,
-            'name' =>$request->textNama,
-            'jeniskelamin' =>$request->selectJenisKelamin,
-            'notelepon' =>$request->textNoTelepon,
-            'alamat' =>$request->textAlamat,
-            'email' =>$request->textEmail,
-            'password' =>bcrypt($request->textPassword),
-            'role' =>'masyarakat'
-        ];
-        User::where('id',$id)->update($dataSimpanMasyarakat);
-        return redirect('/masyarakat');
+        return redirect('/kategori')->with('error', 'Maaf data tidak dapat diubah');
     }
 
     /**

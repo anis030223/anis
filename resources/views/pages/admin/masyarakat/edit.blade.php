@@ -12,7 +12,16 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <from action="/masyarakat" method="POST">
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                                </div>
+                                @endif
+                                <form action="/masyarakat" method="POST">
                                       @csrf
                                       @method('PUT')
                                 <div class="row">
@@ -62,7 +71,7 @@
                                         <a href="/masyarakat" class="btn btn-success btn-md float-right"><li class="fa fa-save"></li> Simpan</a 
                                     </div>
                                 </div>
-                                </from>
+                                </form>
                             </div>
                             <!-- /.card-body -->
                         </div>

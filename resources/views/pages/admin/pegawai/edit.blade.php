@@ -12,6 +12,18 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                                </div>
+                                @endif
+                                <form action="/pegawai/{{ $pegawai->id }}" method="POST">
+                                      @csrf
+                                      @method('PUT')
                                 <div class="row">
                                     <div class="col-12 col-sm-12">
                                         <div class="card-tabs">
@@ -86,10 +98,10 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 col-sm-12">
-                                                            <a href="pegawai.html"
+                                                            <a href="/pegawai"
                                                                 class="btn btn-success btn-md">
                                                                 <li class="fa fa-save"></li> Simpan
-                                                            </a href="/masyarakat.html">
+                                                            </a href="/pegawai">
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="custom-tabs-three-profile"
@@ -105,8 +117,9 @@
                                                                 <input type="password" name="textNewPassword"
                                                                     class="form form-control" id="textNewPassword">
                                                             </div>
-                                                            <div class="form form-group">
-                                                                <a href="pegawai.html" class="btn btn-success btn-md"><li class="fa fa-save"></li> Ubah Password</a>
+                                                            <div class="col-md-12 col-sm-12">
+                                                            <button type="submit" class="btn btn-success btn-md float-right">
+                                                            <li class="fa fa-save"></li> Simpan</button>
                                                             </div>
                                                         </div>
 

@@ -12,10 +12,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    return view('pages.users.index');
-});
-
 Route::get('/dashboard',[DashboardController::class, 'index']);
 Route::resource('/masyarakat',MasyarakatController::class);
 Route::resource('/pegawai',PegawaiController::class);

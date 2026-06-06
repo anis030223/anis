@@ -12,6 +12,14 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                           @if(session('error'))
+                           <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                           <i class="icon fas fa-ban"></i> {{ session('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                             </button>
+                             </div>
+                               @endif
 
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
@@ -24,42 +32,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>3207172222000000</td>
-                                            <td>Lukman</td>
-                                            <td>Admin</td>
-                                            <td>
-                                                <a href="/pegawai/1/edit" class="btn btn-warning btn-xs"
-                                                    title="Edit Masyarakat">
-                                                    <li class="fa fa-edit"></li>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>3207172222000000</td>
-                                            <td>Fery</td>
-                                            <td>Petugas</td>
-                                            <td>
-                                                <a href="/pegawai/2/edit" class="btn btn-warning btn-xs"
-                                                    title="Edit Masyarakat">
-                                                    <li class="fa fa-edit"></li>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>3207172222000000</td>
-                                            <td>Samsu</td>
-                                            <td>Admin</td>
-                                            <td>
-                                                <a href="/pegawai/3/edit" class="btn btn-warning btn-xs"
-                                                    title="Edit Masyarakat">
-                                                    <li class="fa fa-edit"></li>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                     @foreach ($pegawai as $pegawai)
+                                    <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pegawai->nik }}</td>
+                                    <td>{{ $pegawai->nama }}</td>
+                                    <td>{{ $pegawai->jabatan }}</td>
+                                    <td>
+                                        <a href="/pegawai/{{ $pegawai->id }}/edit" class="btn btn-warning btn-xs" title="Edit Pegawai">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        
+                                        <a href="/pegawai/{{ $pegawai->id }}" class="btn btn-primary btn-xs" title="Detail Pegawai">
+                                            <i class="fa fa-list"></i>
+                                        </a>
+                                        </td>
+                                       </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
